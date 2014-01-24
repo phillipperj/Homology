@@ -1,7 +1,8 @@
 #! /usr/bin/env python
 from modeller import *
 from modeller.automodel import *
-import sys, subprocess, shlex
+import sys
+import subprocess, shlex
 
 USAGE = """
 Created on Wed Jan 22 11:24:53 2014
@@ -19,7 +20,6 @@ DATABASE_TYPE = 'pdball.pir'
 #        Ifile = Seq.parse(sys.argv[1],'fasta', ProteinAlphabet())
 #    except:
 #        print usage
-print sys.argv
 
 if len(sys.argv) < 2:
     print USAGE
@@ -76,9 +76,19 @@ def get_motifs():
     search in the Pfam database for known motifs.
     The output isn't parsed though.
     """
-    args = shlex.split("curl -L -H 'Expect:' -H 'Accept:text/xml' -F hmmdb=pfam -F \
-    seq='<" + sys.argv[1] + " http://hmmer.janelia.org/search/hmmscan")
-    subprocess.Popen(args)
+#    data = os.system("curl -L -H 'Expect:' -H 'Accept:text/xml' -F hmmdb=pfam -F seq='<" + sys.argv[1] + "' http://hmmer.janelia.org/search/hmmscan")
+#    print """This is the return from the program:
+#        %s        
+#        """ % (data)
+#    type(data)
+
+    args = shlex.split("curl -L -H 'Expect:' -H 'Accept:text/xml' -F hmmdb=pfam -F seq='<" + sys.argv[1] + "' http://hmmer.janelia.org/search/hmmscan")
+    output = subprocess.check_output(args)
+    o_file = open("Pfam_result_" + sys.argv[1].strip('.pir'), 'wb')   
+    o_file.write(output)
+    o_file.close()
+#    subprocess.call(args, stdout=output)
+    #print output
 
 def do_model():
 
