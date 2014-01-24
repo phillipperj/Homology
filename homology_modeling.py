@@ -89,6 +89,7 @@ def get_motifs():
     o_file.close()
 #    subprocess.call(args, stdout=output)
     #print output
+    
 
 def do_model():
 
@@ -97,5 +98,5 @@ def do_model():
 def do_assessment():
     pass
 
-#get_homologs()
+#get_homologs() this is my changed file
 get_motifs()
