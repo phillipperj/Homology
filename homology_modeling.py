@@ -92,6 +92,11 @@ def get_motifs():
     
 
 def do_model():
+    """Generates 5 models using the alignment and templates returned by 
+    get_homologs(). Sometimes Modeller can't handle the PDB numbering
+    properly and the function doesn't work. In those cases the user
+    is advided to inspect the alignment files (pir files).
+    """
 
     pass
 
